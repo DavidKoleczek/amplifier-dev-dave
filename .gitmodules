@@ -1,0 +1,32 @@
+[submodule "amplifier"]
+	path = amplifier
+	url = https://github.com/microsoft/amplifier.git
+	branch = next
+[submodule "amplifier-app-cli"]
+	path = amplifier-app-cli
+	url = https://github.com/microsoft/amplifier-app-cli.git
+	branch = main
+[submodule "amplifier-core"]
+	path = amplifier-core
+	url = https://github.com/microsoft/amplifier-core.git
+	branch = main
+[submodule "amplifier-module-context-simple"]
+	path = amplifier-module-context-simple
+	url = https://github.com/microsoft/amplifier-module-context-simple.git
+	branch = main
+[submodule "amplifier-module-loop-streaming"]
+	path = amplifier-module-loop-streaming
+	url = https://github.com/microsoft/amplifier-module-loop-streaming.git
+	branch = main
+[submodule "amplifier-module-provider-anthropic"]
+	path = amplifier-module-provider-anthropic
+	url = https://github.com/microsoft/amplifier-module-provider-anthropic.git
+	branch = main
+[submodule "amplifier-module-tool-web"]
+	path = amplifier-module-tool-web
+	url = https://github.com/microsoft/amplifier-module-tool-web.git
+	branch = main
+[submodule "amplifier-module-hooks-streaming-ui"]
+	path = amplifier-module-hooks-streaming-ui
+	url = https://github.com/microsoft/amplifier-module-hooks-streaming-ui.git
+	branch = main
