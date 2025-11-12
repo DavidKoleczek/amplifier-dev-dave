@@ -3,13 +3,14 @@
 uv venv --python 3.11
 
 # Install dev dependencies
-uv pip install ruff pytest
+uv pip install ruff pytest pytest-asyncio
 
 # Install modules in this order
 MODULES=(
   "amplifier-core"
   "amplifier-app-cli"
   "amplifier-module-context-simple"
+  "amplifier-module-context-toolkit"
   "amplifier-module-hooks-streaming-ui"
   "amplifier-module-loop-streaming"
   "amplifier-module-provider-anthropic"

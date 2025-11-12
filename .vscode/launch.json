@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Amplifier",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "amplifier_app_cli.main",
+      "args": ["run", "--profile", "dev-local", "hello!"],
+      "console": "integratedTerminal",
+      "justMyCode": false
+    }
+  ]
+}

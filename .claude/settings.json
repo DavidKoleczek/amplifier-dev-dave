@@ -4,7 +4,8 @@
       "mcp__ide__getDiagnostics",
       "WebSearch",
       "Fetch",
-      "Bash(uv run:*)"
+      "Bash(uv run:*)",
+      "Bash(tree:*)"
     ],
     "deny": [],
     "ask": []
