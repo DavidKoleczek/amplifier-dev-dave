@@ -1,5 +1,6 @@
 This command is designed to help you understand the high level structure of project. Take the following steps:
 - List all the files at the root of the repo (not nested in folders).
+- Read the key documentation
 
 Additional input from the user: $ARGUMENTS
 

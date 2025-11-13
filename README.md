@@ -10,11 +10,14 @@ This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amp
 
 ## Modules as Submodules
 
-- [amplifier](https://github.com/microsoft/amplifier/tree/f3ff1c7ececac8757d9cbc7599e8da0f9f0f2681)
 - [amplifier-app-cli](https://github.com/microsoft/amplifier-app-cli/)
 - [amplifier-core](https://github.com/microsoft/amplifier-core/)
 - [amplifier-module-context-simple](https://github.com/microsoft/amplifier-module-context-simple/)
 - [amplifier-module-loop-streaming](https://github.com/microsoft/amplifier-module-loop-streaming/)
+- [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
+- [amplifier-config](https://github.com/microsoft/amplifier-config/tree/)
+- [amplifier-profiles](https://github.com/microsoft/amplifier-profiles/tree/)
+
 
 ## Modules Used
 

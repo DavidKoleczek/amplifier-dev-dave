@@ -1,0 +1,28 @@
+[submodule "amplifier-app-cli"]
+	path = amplifier-app-cli
+	url = https://github.com/microsoft/amplifier-app-cli
+	branch = main
+[submodule "amplifier-core"]
+	path = amplifier-core
+	url = https://github.com/microsoft/amplifier-core
+	branch = main
+[submodule "amplifier-module-context-simple"]
+	path = amplifier-module-context-simple
+	url = https://github.com/microsoft/amplifier-module-context-simple
+	branch = main
+[submodule "amplifier-module-loop-streaming"]
+	path = amplifier-module-loop-streaming
+	url = https://github.com/microsoft/amplifier-module-loop-streaming
+	branch = main
+[submodule "amplifier-module-provider-openai"]
+	path = amplifier-module-provider-openai
+	url = https://github.com/microsoft/amplifier-module-provider-openai.git
+	branch = main
+[submodule "amplifier-profiles"]
+	path = amplifier-profiles
+	url = https://github.com/microsoft/amplifier-profiles
+	branch = main
+[submodule "amplifier-config"]
+	path = amplifier-config
+	url = https://github.com/microsoft/amplifier-config
+	branch = main
