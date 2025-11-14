@@ -14,10 +14,8 @@ This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amp
 - [amplifier-core](https://github.com/microsoft/amplifier-core/)
 - [amplifier-module-context-simple](https://github.com/microsoft/amplifier-module-context-simple/)
 - [amplifier-module-loop-streaming](https://github.com/microsoft/amplifier-module-loop-streaming/)
-- [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 - [amplifier-config](https://github.com/microsoft/amplifier-config/tree/)
 - [amplifier-profiles](https://github.com/microsoft/amplifier-profiles/tree/)
-
 
 ## Modules Used
 
@@ -38,32 +36,34 @@ This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amp
 
 ## Prerequisites
 
-- Currently focused on development for Windows Subsystem for Linux (WSL). Other platforms may work but are not officially supported.
+- Currently focused on development for Windows Subsystem for Linux (WSL). Other platforms may work with minor changes but are not officially supported.
 - [uv](https://github.com/astral-sh/uv)
 
 
-## Adding new git submodules (corresponding to an Amplifier module in a separate repository)
+## Installation
 
 ```bash
-git submodule add -b <branch_name> <https_git_url> <repo_name>
+./scripts/install-dev.sh
 ```
 
-## Updating submodules to the latest commit on their tracked branch
+
+## Updating Submodules
+
+To pull the latest changes from all submodules:
 
 ```bash
-git submodule update --remote --merge
+./scripts/update-submodules.sh
 ```
 
-## Initializing all submodules
-
-This is *not* required after adding a new submodule, but when cloning the repo for the first time or if submodules add their own submodules.
-
-```bash
-git submodule update --init --recursive
-```
 
 ## Running amplifier in CLI
 
 ```bash
 amplifier run --profile dev-local "hello!"
 ```
+
+
+## Running amplifier in the debugger
+
+A debug configuration is at [.vscode/launch.json](.vscode/launch.json) for running the CLI in the debugger.
+

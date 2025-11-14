@@ -30,6 +30,16 @@ done
 
 git submodule update --init --recursive
 
+# Checkout main branch for each submodule (instead of detached HEAD)
+for module in "${MODULES[@]}"; do
+    if [ -d "$module" ]; then
+        echo "  Checking out $DEFAULT_BRANCH for $module..."
+        cd "$module"
+        git checkout "$DEFAULT_BRANCH"
+        cd ..
+    fi
+done
+
 uv venv --python 3.11
 uv pip install ruff pytest pytest-asyncio
 
