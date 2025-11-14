@@ -6,7 +6,12 @@
       "type": "debugpy",
       "request": "launch",
       "module": "amplifier_app_cli.main",
-      "args": ["run", "--profile", "dev-local", "hello!"],
+      "args": [
+        "run",
+        "--profile",
+        "dev-local",
+        "Can you list the files in my current directory?"
+      ],
       "console": "integratedTerminal",
       "justMyCode": true
     }

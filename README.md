@@ -1,24 +1,28 @@
 # Amplifier Development Workspace
 
-This repository contains copies of relevant Amplifier repositories as submodules for convenient development.
-This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amplifier-dev)
+This repository contains copies of relevant Amplifier repositories as submodules for convenient development for **me**.
+However, it is made open to serve as an example or reference for others who are exploring how to work with Amplifier.
+This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amplifier-dev).
 
+One way to describe Amplifier is that it is a fully modular agent, where each core component can be swapped out for different implementations.
+For example, not only can LLM providers or tools be configured, but also the orchestration loop and how context is managed.
+Additionally, configurations can be created that bundle together different modules, prompts, agents, usage of models, and much more.
 
-## Modules Copied
-
-- [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 
 ## Local Development Modules
 
 These are modules that are actively being developed.
 Eventually, these may graduate to their own repos.
 
-- **amplifier-module-provider-openai-v2** - Improved OpenAI provider following best practices (local development)
+- [amplifier-module-provider-openai-v2](./amplifier-module-provider-openai-v2/) - Improved OpenAI provider following best practices (local development)
+> **Warning:** This module is highly experimental. To switch back to the default OpenAI provider, edit [.amplifier/profiles/dev-local.md](./.amplifier/profiles/dev-local.md).
+
 
 ## Modules as Submodules
 
 There are repos that are meant to be more stable and we are unlikely to need to make significant changes to them.
 
+- [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 - [amplifier-app-cli](https://github.com/microsoft/amplifier-app-cli/)
 - [amplifier-core](https://github.com/microsoft/amplifier-core/)
 - [amplifier-module-context-simple](https://github.com/microsoft/amplifier-module-context-simple/)
@@ -54,6 +58,8 @@ These are listed here for reference as they are used in amplifier profiles.
 
 ## Installation
 
+Initial setup.
+
 ```bash
 ./scripts/install-dev.sh
 ```
@@ -70,9 +76,8 @@ To pull the latest changes from all submodules:
 
 ## Code Formatting
 
-All local modules are automatically formatted with ruff after any file edits (via Claude Code PostToolUse hook).
-
-To manually format all local modules:
+All local modules are automatically formatted with ruff after any file edits (most useful as a post edit tool use hook).
+To format all local modules:
 
 ```bash
 ./scripts/format.sh
@@ -81,6 +86,7 @@ To manually format all local modules:
 
 ## Running amplifier in CLI
 
+Test amplifier with local modules enabled. This uses local models by configuring them in [.amplifier/profiles/dev-local.md](.amplifier/profiles/dev-local.md).
 ```bash
 amplifier run --profile dev-local "hello!"
 ```
@@ -88,5 +94,4 @@ amplifier run --profile dev-local "hello!"
 
 ## Running amplifier in the debugger
 
-A debug configuration is at [.vscode/launch.json](.vscode/launch.json) for running the CLI in the debugger.
-
+A debug configuration is at [.vscode/launch.json](.vscode/launch.json) for running the CLI in the debugger with a sample prompt.
