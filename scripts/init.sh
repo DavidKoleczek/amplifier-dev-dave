@@ -8,7 +8,7 @@ set -e
 GITHUB_ORG="microsoft"
 DEFAULT_BRANCH="main"
 
-# Modules in dependency order (used for both submodules and installation)
+# Submodules in dependency order
 MODULES=(
     "amplifier-core"
     "amplifier-config"
@@ -17,6 +17,11 @@ MODULES=(
     "amplifier-module-context-simple"
     "amplifier-module-loop-streaming"
     "amplifier-module-provider-openai"
+)
+
+# Local modules (not submodules)
+LOCAL_MODULES=(
+    "amplifier-module-provider-openai-v2"
 )
 
 for module in "${MODULES[@]}"; do
@@ -48,4 +53,16 @@ for module in "${MODULES[@]}"; do
   cd "$module"
   uv pip install -e . > /dev/null
   cd ..
+done
+
+# Install local modules
+for module in "${LOCAL_MODULES[@]}"; do
+  if [ -d "$module" ]; then
+    echo "  Installing $module..."
+    cd "$module"
+    uv pip install -e . > /dev/null
+    cd ..
+  else
+    echo "  [SKIP] $module (not found)"
+  fi
 done

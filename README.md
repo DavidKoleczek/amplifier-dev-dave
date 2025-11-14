@@ -8,7 +8,16 @@ This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amp
 
 - [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 
+## Local Development Modules
+
+These are modules that are actively being developed.
+Eventually, these may graduate to their own repos.
+
+- **amplifier-module-provider-openai-v2** - Improved OpenAI provider following best practices (local development)
+
 ## Modules as Submodules
+
+There are repos that are meant to be more stable and we are unlikely to need to make significant changes to them.
 
 - [amplifier-app-cli](https://github.com/microsoft/amplifier-app-cli/)
 - [amplifier-core](https://github.com/microsoft/amplifier-core/)
@@ -18,6 +27,9 @@ This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amp
 - [amplifier-profiles](https://github.com/microsoft/amplifier-profiles/tree/)
 
 ## Modules Used
+
+These are repos that are stable, not dependencies of others, and there is a minimal chance we will need to modify them.
+These are listed here for reference as they are used in amplifier profiles.
 
 - [amplifier-collection-toolkit](https://github.com/microsoft/amplifier-collection-toolkit/)
 - [amplifier-module-hooks-streaming-ui](https://github.com/microsoft/amplifier-module-hooks-streaming-ui/)
@@ -53,6 +65,17 @@ To pull the latest changes from all submodules:
 
 ```bash
 ./scripts/update-submodules.sh
+```
+
+
+## Code Formatting
+
+All local modules are automatically formatted with ruff after any file edits (via Claude Code PostToolUse hook).
+
+To manually format all local modules:
+
+```bash
+./scripts/format.sh
 ```
 
 

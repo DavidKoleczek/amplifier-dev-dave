@@ -92,6 +92,9 @@ section-order = [
     "local-folder",
 ]
 
+# Specify first-party modules (all amplifier packages)
+known-first-party = ["amplifier_core", "amplifier_config", "amplifier_profiles", "amplifier_app_cli", "amplifier_module_context_simple", "amplifier_module_loop_streaming", "amplifier_module_provider_openai", "amplifier_module_provider_openai_v2"]
+
 [lint.pydocstyle]
 # Use Google docstring convention
 convention = "google"

@@ -23,10 +23,10 @@ task:
   max_recursion_depth: 1
 
 providers:
-  - module: provider-openai
-    source: ./amplifier-module-provider-openai
+  - module: provider-openai-v2
+    source: ./amplifier-module-provider-openai-v2
     config:
-      default_model: gpt-5-codex
+      default_model: gpt-5.1-codex
       debug: true
 
 ui:

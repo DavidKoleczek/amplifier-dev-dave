@@ -1,0 +1,1 @@
+@ai_context/INDEX.md - `ai_context/` contains various documentation files and links to websites with further documentation for various aspects of the project. Use the INDEX.md to start navigating the documentation.
