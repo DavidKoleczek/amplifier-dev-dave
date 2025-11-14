@@ -1,7 +1,7 @@
 # Amplifier Development Workspace
 
-This repository contains copies of relevant Amplifier repositories as submodules for convenient development for **me**.
-However, it is made open to serve as an example or reference for others who are exploring how to work with Amplifier.
+This repository contains copies of relevant Amplifier repositories as submodules for convenient development for *me* and intentionally kept minimal.
+It can also serve as an example or reference for others who are exploring how to work with Amplifier.
 This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amplifier-dev).
 
 One way to describe Amplifier is that it is a fully modular agent, where each core component can be swapped out for different implementations.
@@ -20,7 +20,7 @@ Eventually, these may graduate to their own repos.
 
 ## Modules as Submodules
 
-There are repos that are meant to be more stable and we are unlikely to need to make significant changes to them.
+These are the repos that are meant to be more stable and are less unlikely to need significant changes to them during the development of our other modules.
 
 - [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 - [amplifier-app-cli](https://github.com/microsoft/amplifier-app-cli/)
@@ -58,7 +58,7 @@ These are listed here for reference as they are used in amplifier profiles.
 
 ## Installation
 
-Initial setup.
+Initial setup:
 
 ```bash
 ./scripts/install-dev.sh
