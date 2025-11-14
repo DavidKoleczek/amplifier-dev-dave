@@ -2,7 +2,6 @@
 
 This repository contains copies of relevant Amplifier repositories as submodules for convenient development for *me* and intentionally kept minimal.
 It can also serve as an example or reference for others who are exploring how to work with Amplifier.
-This repo is based on [microsoft/amplifier-dev](https://github.com/microsoft/amplifier-dev).
 
 One way to describe Amplifier is that it is a fully modular agent, where each core component can be swapped out for different implementations.
 For example, not only can LLM providers or tools be configured, but also the orchestration loop and how context is managed.
