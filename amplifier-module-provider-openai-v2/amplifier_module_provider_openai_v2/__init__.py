@@ -216,7 +216,9 @@ class OpenAIProvider:
                     "model": model,
                     "usage": usage,
                     "has_tool_calls": bool(tool_calls),
-                    "has_reasoning": any(getattr(block, "type", None) == ContentBlockType.THINKING for block in content_blocks),
+                    "has_reasoning": any(
+                        getattr(block, "type", None) == ContentBlockType.THINKING for block in content_blocks
+                    ),
                 },
             )
 
@@ -535,9 +537,7 @@ class OpenAIProvider:
 
         return converted or None
 
-    def _parse_openai_response(
-        self, response: Any
-    ) -> tuple[str, list[ToolCall], list[ContentBlock], dict[str, int]]:
+    def _parse_openai_response(self, response: Any) -> tuple[str, list[ToolCall], list[ContentBlock], dict[str, int]]:
         """Parse OpenAI Responses API output into Amplifier types."""
 
         def _get(value: Any, attr: str, default: Any = None) -> Any:
@@ -588,7 +588,7 @@ class OpenAIProvider:
         if response is None:
             output_items = []
         elif hasattr(response, "output"):
-            output_items = getattr(response, "output") or []
+            output_items = response.output or []
         elif isinstance(response, dict):
             output_items = response.get("output", []) or []
 

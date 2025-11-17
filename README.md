@@ -19,7 +19,7 @@ Additionally, configurations can be created that bundle together different modul
 Initial setup:
 
 ```bash
-./scripts/install-dev.sh
+./scripts/init.sh
 ```
 
 
@@ -66,7 +66,8 @@ Eventually, these may graduate to their own repos.
 
 ## Modules as Submodules
 
-These are the repos that are meant to be more stable and are less unlikely to need significant changes to them during the development of our other modules.
+These are reference repos that are less likely to need significant changes to them during the development of our other modules.
+They are included here as submodules for easier debugging or making temporary local changes.
 
 - [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 - [amplifier-app-cli](https://github.com/microsoft/amplifier-app-cli/)
@@ -79,8 +80,8 @@ These are the repos that are meant to be more stable and are less unlikely to ne
 
 ## Modules Used
 
-These are repos that are stable, not dependencies of others, and there is a minimal chance we will need to modify them.
-These are listed here for reference as they are used in amplifier profiles.
+These are repos that are used by the profile or by other modules.
+They are not linked as submodules because there is a minimal chance we will need to modify them.
 
 - [amplifier-collection-toolkit](https://github.com/microsoft/amplifier-collection-toolkit/)
 - [amplifier-module-hooks-streaming-ui](https://github.com/microsoft/amplifier-module-hooks-streaming-ui/)
