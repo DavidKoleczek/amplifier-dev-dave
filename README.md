@@ -60,8 +60,11 @@ A debug configuration is at [.vscode/launch.json](.vscode/launch.json) for runni
 These are modules that are actively being developed.
 Eventually, these may graduate to their own repos.
 
-- [amplifier-module-provider-openai-v2](./amplifier-module-provider-openai-v2/) - Improved OpenAI provider following best practices (local development)
-> **Warning:** This module is highly experimental. To switch back to the default OpenAI provider, edit [.amplifier/profiles/dev-local.md](./.amplifier/profiles/dev-local.md).
+- **[amplifier-module-provider-openai-v2](./amplifier-module-provider-openai-v2/)** - OpenAI provider using the Responses API with configurable model and reasoning effort.
+
+- **[amplifier-module-context-coding](./amplifier-module-context-coding/)** - Minimal context manager for coding workflows.
+
+- **[amplifier-module-orchestrator-coding](./amplifier-module-orchestrator-coding/)** - Minimal orchestrator implementing the core orchestration loop: calls provider, executes tools in parallel, adds results to context, and loops until completion.
 
 
 ## Modules as Submodules

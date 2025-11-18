@@ -1,6 +1,6 @@
 # Amplifier Context Manager Coding
 
-A amplifier context module optimized for agentic code generation use cases.
+An amplifier context module optimized for agentic code generation use cases.
 Currently assumes that the provider will automatically truncate like the OpenAI Responses API.
 
 

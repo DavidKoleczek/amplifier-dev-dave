@@ -164,7 +164,7 @@ class OpenAIProvider:
                                     content=content_block.text,
                                 )
                             )
-                        # Messages with role = Assistant and ToolCall Block are turned into into ResponseFunctionToolCallParam
+                        # Messages with role = Assistant and ToolCall Block are turned into ResponseFunctionToolCallParam
                         elif isinstance(content_block, ToolCallBlock):
                             response_input_param.append(
                                 ResponseFunctionToolCallParam(
