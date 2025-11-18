@@ -13,6 +13,8 @@ RUFF="$REPO_ROOT/.venv/bin/ruff"
 # Local modules to format
 LOCAL_MODULES=(
     "amplifier-module-provider-openai-v2"
+    "amplifier-module-orchestrator-coding"
+    "amplifier-module-context-coding"
 )
 
 echo "Formatting all local modules with ruff..."

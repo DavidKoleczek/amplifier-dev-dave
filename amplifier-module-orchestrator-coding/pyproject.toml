@@ -1,0 +1,32 @@
+[project]
+name = "amplifier-module-orchestrator-coding"
+version = "1.0.0"
+description = "Orchestrator module for Amplifier"
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Microsoft MADE:Explorations Team" },
+]
+dependencies = [
+]
+
+[project.entry-points."amplifier.modules"]
+orchestrator-coding = "amplifier_module_orchestrator_coding:mount"
+
+[build-system]
+requires = [
+    "hatchling",
+]
+build-backend = "hatchling.build"
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "amplifier_module_orchestrator_coding",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true

@@ -8,20 +8,22 @@ set -e
 GITHUB_ORG="microsoft"
 DEFAULT_BRANCH="main"
 
-# Submodules in dependency order
+# Install submodules in this order
+# NOTE: It is important that amplifier-app-cli is first, so the the next packages override its dependencies correctly (namely the amplifier-core)
 MODULES=(
+    "amplifier-app-cli"
     "amplifier-core"
     "amplifier-config"
     "amplifier-profiles"
-    "amplifier-app-cli"
     "amplifier-module-context-simple"
-    "amplifier-module-loop-streaming"
     "amplifier-module-provider-openai"
 )
 
 # Local modules (not submodules)
 LOCAL_MODULES=(
+    "amplifier-module-orchestrator-coding"
     "amplifier-module-provider-openai-v2"
+    "amplifier-module-context-coding"
 )
 
 for module in "${MODULES[@]}"; do
@@ -33,15 +35,23 @@ for module in "${MODULES[@]}"; do
     fi
 done
 
-git submodule update --init --recursive
-
-# Checkout main branch for each submodule (instead of detached HEAD)
+# Initialize and checkout main branch for submodules
+# Skips those with local changes
 for module in "${MODULES[@]}"; do
     if [ -d "$module" ]; then
-        echo "  Checking out $DEFAULT_BRANCH for $module..."
         cd "$module"
-        git checkout "$DEFAULT_BRANCH"
-        cd ..
+        if git diff-index --quiet HEAD -- 2>/dev/null; then
+            cd ..
+            # Update submodule (init if needed)
+            git submodule update --init "$module" 2>/dev/null || true
+            cd "$module"
+            # Ensure on main branch (not detached HEAD)
+            git checkout "$DEFAULT_BRANCH" 2>/dev/null || echo "  [INFO] $module already on $DEFAULT_BRANCH"
+            cd ..
+        else
+            echo "  [SKIP] $module (has local changes)"
+            cd ..
+        fi
     fi
 done
 
