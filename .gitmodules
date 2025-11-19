@@ -26,3 +26,6 @@
 	path = amplifier-config
 	url = https://github.com/microsoft/amplifier-config
 	branch = main
+[submodule "amplifier-app-benchmarks"]
+	path = amplifier-app-benchmarks
+	url = https://github.com/DavidKoleczek/amplifier-app-benchmarks.git

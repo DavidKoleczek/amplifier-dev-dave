@@ -74,6 +74,7 @@ They are included here as submodules for easier debugging or making temporary lo
 
 - [amplifier-module-provider-openai](https://github.com/microsoft/amplifier-module-provider-openai/)
 - [amplifier-app-cli](https://github.com/microsoft/amplifier-app-cli/)
+- [amplifier-app-benchmarks](https://github.com/DavidKoleczek/amplifier-app-benchmarks/)
 - [amplifier-core](https://github.com/microsoft/amplifier-core/)
 - [amplifier-module-context-simple](https://github.com/microsoft/amplifier-module-context-simple/)
 - [amplifier-module-loop-streaming](https://github.com/microsoft/amplifier-module-loop-streaming/)
