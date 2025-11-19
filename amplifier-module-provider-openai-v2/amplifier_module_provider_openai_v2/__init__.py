@@ -3,6 +3,8 @@ import logging
 import os
 from typing import Any
 
+from azure.identity.aio import DefaultAzureCredential
+from azure.identity.aio import get_bearer_token_provider
 from openai import AsyncOpenAI
 from openai.types.responses.easy_input_message_param import EasyInputMessageParam
 from openai.types.responses.function_tool_param import FunctionToolParam
@@ -39,6 +41,10 @@ class OpenAIV2Config(BaseModel):
         default="medium",
         description='Reasoning effort level: "none", "minimal", "low", "medium", or "high" (options depend on model, see https://platform.openai.com/docs/api-reference/responses/create#responses_create-reasoning)',
     )
+    use_azure: bool = Field(
+        default=False,
+        description="Explicitly use Azure OpenAI. If False, uses OpenAI API. If True, requires AZURE_OPENAI_ENDPOINT environment variable.",
+    )
 
 
 async def mount(coordinator: ModuleCoordinator, config: dict[str, Any] | None = None) -> Any:
@@ -52,25 +58,54 @@ async def mount(coordinator: ModuleCoordinator, config: dict[str, Any] | None = 
         Optional cleanup function for unmounting
 
     Raises:
-        ValueError: If API key is not provided
+        ValueError: If API key is not provided (when not using Azure Entra ID)
     """
     config_dict = config or {}
-    api_key = config_dict.get("api_key") or os.environ.get("OPENAI_API_KEY")
-
-    if not api_key:
-        raise ValueError(
-            "OpenAI provider requires an API key. Set config['api_key'] or the OPENAI_API_KEY environment variable."
-        )
 
     # Parse and validate config
     provider_config = OpenAIV2Config(**config_dict)
 
-    client = AsyncOpenAI(api_key=api_key)
+    # Determine if using Azure OpenAI based on explicit config
+    if provider_config.use_azure:
+        # Check for Azure OpenAI endpoint from environment
+        azure_endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
+
+        if not azure_endpoint:
+            raise ValueError("use_azure is True but AZURE_OPENAI_ENDPOINT environment variable is not set.")
+
+        # Normalize Azure endpoint: strip trailing slash and append /openai/v1/
+        azure_endpoint = azure_endpoint.rstrip("/")
+        base_url = f"{azure_endpoint}/openai/v1/"
+
+        # Check if API key is provided for Azure
+        api_key = os.environ.get("AZURE_OPENAI_API_KEY")
+
+        if api_key:
+            # Use API key authentication with Azure
+            client = AsyncOpenAI(api_key=api_key, base_url=base_url)
+            credential = None
+        else:
+            # Use Entra ID authentication with Azure
+            credential = DefaultAzureCredential()
+            token_provider = get_bearer_token_provider(credential, "https://cognitiveservices.azure.com/.default")
+            client = AsyncOpenAI(api_key=token_provider, base_url=base_url)
+    else:
+        # Use standard OpenAI API
+        api_key = os.environ.get("OPENAI_API_KEY")
+
+        if not api_key:
+            raise ValueError("OpenAI provider requires an API key. Set the OPENAI_API_KEY environment variable.")
+
+        client = AsyncOpenAI(api_key=api_key)
+        credential = None
+
     provider = OpenAIProvider(client=client, config=provider_config, coordinator=coordinator)
     await coordinator.mount("providers", provider, name="openai-v2")
 
     async def cleanup() -> None:
         await client.close()
+        if credential:
+            await credential.close()
 
     return cleanup
 

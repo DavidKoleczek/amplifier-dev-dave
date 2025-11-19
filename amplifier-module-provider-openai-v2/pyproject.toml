@@ -19,15 +19,16 @@ classifiers = [
 ]
 
 dependencies = [
-    "openai>=1.0.0",
+    "azure-identity>=1.25,<2.0",
+    "openai[aiohttp]>=2.8,<3.0",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
-    "pytest-mock>=3.10.0",
-    "ruff>=0.1.0",
+    "pytest>=8.0,<10.0",
+    "pytest-asyncio>=1.0,<2.0",
+    "pytest-mock>=3.14,<4.0",
+    "ruff",
 ]
 
 # CRITICAL: Entry point registration for Amplifier module system
@@ -40,12 +41,6 @@ build-backend = "hatchling.build"
 
 [tool.uv]
 package = true
-dev-dependencies = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
-    "pytest-mock>=3.10.0",
-    "ruff>=0.1.0",
-]
 
 [tool.hatch.build.targets.wheel]
 packages = ["amplifier_module_provider_openai_v2"]

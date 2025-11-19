@@ -22,8 +22,9 @@ providers:
   - module: provider-openai-v2
     source: ./amplifier-module-provider-openai-v2
     config:
+      use_azure: false
       model: gpt-5.1-codex
-      reasoning_effort: high
+      reasoning_effort: medium
 
 ui:
   show_thinking_stream: true

@@ -5,6 +5,9 @@ OpenAI provider for Amplifier using the Responses API with sensible defaults for
 
 ## Configuration
 
+### Profile Configuration
+
+**OpenAI API (default):**
 ```yaml
 providers:
   - module: provider-openai-v2
@@ -12,6 +15,33 @@ providers:
       model: gpt-5.1-codex   # Supports GPT-5 family of models https://platform.openai.com/docs/models
       reasoning_effort: low  # Options depend on the specific model, consult https://platform.openai.com/docs/api-reference/responses/create#responses_create-reasoning
 ```
+
+**Azure OpenAI:**
+```yaml
+providers:
+  - module: provider-openai-v2
+    config:
+      use_azure: true        # Explicitly use Azure OpenAI
+      model: gpt-5.1-codex   # Your Azure deployment name
+      reasoning_effort: high
+```
+
+### Environment Variables
+
+Authentication is handled entirely through environment variables to prevent sensitive data from being committed:
+
+**OpenAI API:**
+- `OPENAI_API_KEY` - Required for OpenAI API access
+
+**Azure OpenAI with API Key Authentication:**
+- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI endpoint URL (e.g., `https://your-resource.openai.azure.com`)
+- `AZURE_OPENAI_API_KEY` - Azure OpenAI API key
+
+**Azure OpenAI with Entra ID Authentication:**
+- `AZURE_OPENAI_ENDPOINT` - Azure OpenAI endpoint URL (e.g., `https://your-resource.openai.azure.com`)
+- When `AZURE_OPENAI_API_KEY` is not set, the module automatically uses Microsoft Entra ID (formerly Azure Active Directory) with `DefaultAzureCredential`
+
+**Note:** Set `use_azure: true` in the config to explicitly use Azure OpenAI. This allows you to have both `OPENAI_API_KEY` and `AZURE_OPENAI_ENDPOINT` set and choose which one to use per profile.
 
 
 ## Module Schema
