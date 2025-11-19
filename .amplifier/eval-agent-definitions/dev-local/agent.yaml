@@ -1,0 +1,6 @@
+# Copyright (c) Microsoft. All rights reserved
+
+# This path will be replaced at runtime with the actual local_source_path
+local_source_path: PLACEHOLDER_WILL_BE_REPLACED
+required_env_vars:
+  - OPENAI_API_KEY

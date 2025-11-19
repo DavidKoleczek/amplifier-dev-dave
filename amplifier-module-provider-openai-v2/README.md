@@ -80,3 +80,4 @@ class OpenAIProvider:
 - Fix losing reasoning between steps
 - Construct profile with system prompt best for GPT-5.1-codex
 - See what happens with built in tools like `web_search`
+- Check out `amplifier-core/docs/specs/CONTRIBUTION_CHANNELS.md` to handle context management for stuff specific to provider

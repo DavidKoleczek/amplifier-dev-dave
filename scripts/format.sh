@@ -15,6 +15,7 @@ LOCAL_MODULES=(
     "amplifier-module-provider-openai-v2"
     "amplifier-module-orchestrator-coding"
     "amplifier-module-context-coding"
+    "amplifier-app-benchmarks"
 )
 
 echo "Formatting all local modules with ruff..."

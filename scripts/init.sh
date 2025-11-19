@@ -12,6 +12,7 @@ DEFAULT_BRANCH="main"
 # NOTE: It is important that amplifier-app-cli is first, so the the next packages override its dependencies correctly (namely the amplifier-core)
 MODULES=(
     "amplifier-app-cli"
+    "amplifier-app-benchmarks"
     "amplifier-core"
     "amplifier-config"
     "amplifier-profiles"

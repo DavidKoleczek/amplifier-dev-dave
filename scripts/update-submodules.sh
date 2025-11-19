@@ -11,6 +11,7 @@ MODULES=(
     "amplifier-config"
     "amplifier-profiles"
     "amplifier-app-cli"
+    "amplifier-app-benchmarks"
     "amplifier-module-context-simple"
     "amplifier-module-loop-streaming"
 )

@@ -1,0 +1,1 @@
+amplifier run --profile dev-local-docker --verbose "{{task_instructions}}"

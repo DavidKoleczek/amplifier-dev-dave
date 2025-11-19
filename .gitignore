@@ -1,5 +1,20 @@
 # Project specific
 .claude/
+.benchmark_results/
+
+# Amplifier local state (do not commit developer's profile choice)
+.amplifier/*
+# But DO commit templates, default profile, and custom profiles
+!.amplifier/*.template
+!.amplifier/default-profile
+!.amplifier/profiles/
+!.amplifier/settings.yaml
+!.amplifier/eval-agent-definitions/
+!.amplifier/eval-agent-definitions/**
+
+# Amplifier logs
+*.log.jsonl
+amplifier.log.jsonl
 
 # Python
 __pycache__/
@@ -41,17 +56,4 @@ Thumbs.db
 *.local
 .env
 
-# Amplifier local state (do not commit developer's profile choice)
-.amplifier/*
-# But DO commit templates, default profile, and custom profiles
-!.amplifier/*.template
-!.amplifier/default-profile
-!.amplifier/profiles/
-!.amplifier/settings.yaml
 
-# Amplifier logs
-*.log.jsonl
-amplifier.log.jsonl
-
-# Beads issue tracker databases (only track JSONL exports)
-.beads/*.db

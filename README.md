@@ -99,3 +99,24 @@ They are not linked as submodules because there is a minimal chance we will need
 - [amplifier-module-tool-web](https://github.com/microsoft/amplifier-module-tool-web/)
 - [amplifier-module-resolution](https://github.com/microsoft/amplifier-module-resolution/tree/)
 
+
+## Evaluating Local Changes with Benchmarks
+
+Run benchmarks to evaluate your local changes using the dev-local profile:
+
+```bash
+# Mode can be "sanity_check", "quick", or "full"
+uv run run_benchmarks \
+    --local_source_path . \
+    --override_agent_path .amplifier/eval-agent-definitions/dev-local \
+    --mode sanity_check
+```
+
+**Prerequisites:**
+- `OPENAI_API_KEY` environment variable must be set (required by dev-local profile)
+- `ANTHROPIC_API_KEY` environment variable must be set (required by eval-recipes test harness)
+- Docker must be running with proper permissions
+
+**Results:** Saved to `.benchmark_results/`
+
+See [amplifier-app-benchmarks](./amplifier-app-benchmarks/README.md) for full details.
