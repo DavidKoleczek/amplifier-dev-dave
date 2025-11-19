@@ -9,15 +9,11 @@ session:
     module: orchestrator-coding
     source: ./amplifier-module-orchestrator-coding
     config:
-      extended_thinking: true
+      max_iterations: 100
   context:
     module: context-coding
     source: ./amplifier-module-context-coding
-    config:
-      max_tokens: 400000
-      compact_threshold: 0.8
-      auto_compact: true
-  injection_budget_per_turn: 200000
+  injection_budget_per_turn: 100000
 
 task:
   max_recursion_depth: 1
@@ -26,8 +22,8 @@ providers:
   - module: provider-openai-v2
     source: ./amplifier-module-provider-openai-v2
     config:
-      default_model: gpt-5.1-codex
-      debug: true
+      model: gpt-5.1-codex
+      reasoning_effort: high
 
 ui:
   show_thinking_stream: true

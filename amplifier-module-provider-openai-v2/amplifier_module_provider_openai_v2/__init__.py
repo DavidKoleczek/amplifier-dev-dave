@@ -2,7 +2,6 @@ import json
 import logging
 import os
 from typing import Any
-from typing import Literal
 
 from openai import AsyncOpenAI
 from openai.types.responses.easy_input_message_param import EasyInputMessageParam
@@ -11,7 +10,10 @@ from openai.types.responses.response import Response
 from openai.types.responses.response_function_tool_call_param import ResponseFunctionToolCallParam
 from openai.types.responses.response_input_param import FunctionCallOutput
 from openai.types.responses.response_input_param import ResponseInputParam
+from openai.types.responses.response_reasoning_item_param import ResponseReasoningItemParam
 from openai.types.responses.tool_param import ToolParam
+from openai.types.shared.reasoning_effort import ReasoningEffort
+from openai.types.shared_params.reasoning import Reasoning
 from pydantic import BaseModel
 from pydantic import Field
 
@@ -33,8 +35,9 @@ class OpenAIV2Config(BaseModel):
     """Configuration for OpenAI v2 provider."""
 
     model: str = Field(default="gpt-5.1-codex", description="OpenAI model to use")
-    reasoning_effort: Literal["low", "medium", "high"] = Field(
-        default="low", description="Reasoning effort level for extended thinking"
+    reasoning_effort: ReasoningEffort = Field(
+        default="medium",
+        description='Reasoning effort level: "none", "minimal", "low", "medium", or "high" (options depend on model, see https://platform.openai.com/docs/api-reference/responses/create#responses_create-reasoning)',
     )
 
 
@@ -174,6 +177,9 @@ class OpenAIProvider:
                                     arguments=json.dumps(content_block.input or {}),
                                 )
                             )
+                        # Messages with role = Assistant and ReasoningBlock are turned into ResponseReasoningItemParam
+                        elif isinstance(content_block, ReasoningBlock):
+                            response_input_param.append(self._convert_reasoning_block(content_block))
                 # Messages with role = Function and ToolResultBlock are turned into FunctionCallOutput
                 case "function":
                     for content_block in message.content:
@@ -186,8 +192,42 @@ class OpenAIProvider:
                                 )
                             )
 
-            # Any Reasoning blocks are currently skipped, the assistant message is ignored
         return response_input_param
+
+    def _convert_reasoning_block(self, reasoning_block: ReasoningBlock) -> ResponseReasoningItemParam:
+        """Convert Amplifier ReasoningBlock to OpenAI ResponseReasoningItemParam.
+
+        Args:
+            reasoning_block: The ReasoningBlock from Amplifier context.
+                Content list structure (workaround):
+                - content[0] = encrypted_content
+                - content[1] = OpenAI reasoning ID (starts with 'rs_')
+
+        Returns:
+            ResponseReasoningItemParam suitable for OpenAI Responses API
+        """
+        # Process summary
+        reasoning_summary = []
+        if reasoning_block.summary:
+            for item in reasoning_block.summary:
+                if isinstance(item, str):
+                    reasoning_summary.append({"type": "summary_text", "text": item})
+
+        # Extract ID from content[1] (workaround: content[0]=encrypted_content, content[1]=id)
+        reasoning_id = reasoning_block.content[1]
+
+        # Build the ResponseReasoningItemParam
+        param: ResponseReasoningItemParam = {
+            "type": "reasoning",
+            "id": reasoning_id,  # Use stored OpenAI reasoning ID
+            "summary": reasoning_summary,
+        }
+
+        # Add encrypted content if present (content[0])
+        if reasoning_block.content and reasoning_block.content[0]:
+            param["encrypted_content"] = reasoning_block.content[0]
+
+        return param
 
     def _amplifier_to_responses_tool_calls(self, tools: list[ToolSpec]) -> list[ToolParam]:
         tool_params: list[ToolParam] = []
@@ -215,8 +255,10 @@ class OpenAIProvider:
                     content_blocks.append(
                         ReasoningBlock(
                             content=[
-                                content_block.encrypted_content or None
-                            ],  # This encrypted content need to be expanded back out for the next request
+                                content_block.encrypted_content
+                                or None,  # content[0] = encrypted_content (for reasoning continuity)
+                                content_block.id,  # content[1] = id (OpenAI reasoning ID starting with 'rs_')
+                            ],
                             summary=[s.text for s in content_block.summary],
                             visibility="internal",  # TODO: Unclear what visibility should be
                         )

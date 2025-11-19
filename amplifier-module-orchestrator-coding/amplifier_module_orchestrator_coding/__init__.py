@@ -13,7 +13,6 @@ from amplifier_core import ToolCallBlock
 from amplifier_core import ToolResult
 from amplifier_core import ToolResultBlock
 from amplifier_core.message_models import ChatRequest
-from amplifier_core.message_models import ContentBlockUnion
 from amplifier_core.message_models import ToolCall
 from amplifier_core.message_models import ToolSpec
 
@@ -68,7 +67,7 @@ class CodingOrchestrator:
         tools_specs: list[ToolSpec] = [
             ToolSpec(
                 name=name,
-                description=tool_obj.description,
+                description=tool_obj.description.strip(),
                 parameters=tool_obj.input_schema,  # type: ignore
             )
             for name, tool_obj in tools.items()
@@ -90,9 +89,9 @@ class CodingOrchestrator:
                 messages = await context.get_messages()
                 request = ChatRequest(messages=messages, tools=[])  # No tools for final response
                 response = await provider.complete(request)
-                text_content = self._extract_text(response.content)
-                await context.add_message(Message(role="assistant", content=[TextBlock(text=text_content)]))
-                return text_content
+                # Store ALL blocks from response.content
+                await context.add_message(Message(role="assistant", content=response.content))
+                return self._extract_text(response.content)
 
             iteration += 1
             # Get current messages from context and call provider
@@ -100,24 +99,21 @@ class CodingOrchestrator:
             request = ChatRequest(messages=messages, tools=tools_specs)
             response = await provider.complete(request)
 
-            # Check for tool calls in response
-            tool_calls = response.tool_calls or []
+            # Store ALL blocks from response.content (including ReasoningBlocks)
+            await context.add_message(Message(role="assistant", content=response.content))
 
-            if not tool_calls:
+            # Check for tool calls by introspecting content blocks
+            tool_call_blocks = [block for block in response.content if isinstance(block, ToolCallBlock)]
+
+            if not tool_call_blocks:
                 # No tools requested - extract text and return final response
-                text_content = self._extract_text(response.content)
-                await context.add_message(Message(role="assistant", content=[TextBlock(text=text_content)]))
-                return text_content
+                return self._extract_text(response.content)
 
-            # Tools requested - add assistant message with tool call blocks
-            tool_call_blocks: list[ContentBlockUnion] = [
-                ToolCallBlock(id=tc.id, name=tc.name, input=tc.arguments) for tc in tool_calls
-            ]
-            await context.add_message(Message(role="assistant", content=tool_call_blocks))
+            # Tools requested - convert blocks to ToolCall format for execution
+            tool_calls = [ToolCall(id=block.id, name=block.name, arguments=block.input) for block in tool_call_blocks]
 
             # Execute all tools in parallel
-            tool_tasks = [self._execute_tool(tc, tools, hooks) for tc in tool_calls]
-            tool_results = await asyncio.gather(*tool_tasks)
+            tool_results = await asyncio.gather(*[self._execute_tool(tc, tools, hooks) for tc in tool_calls])
 
             # Add tool results to context
             for tc, result in zip(tool_calls, tool_results, strict=True):
