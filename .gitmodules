@@ -29,3 +29,11 @@
 [submodule "amplifier-app-benchmarks"]
 	path = amplifier-app-benchmarks
 	url = https://github.com/DavidKoleczek/amplifier-app-benchmarks.git
+[submodule "amplifier-module-tool-bash"]
+	path = amplifier-module-tool-bash
+	url = https://github.com/microsoft/amplifier-module-tool-bash
+	branch = main
+[submodule "amplifier-module-tool-todo"]
+	path = amplifier-module-tool-todo
+	url = https://github.com/microsoft/amplifier-module-tool-todo
+	branch = main

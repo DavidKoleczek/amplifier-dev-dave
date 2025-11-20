@@ -38,11 +38,9 @@ tools:
   - module: tool-task
     source: git+https://github.com/microsoft/amplifier-module-tool-task@main
   - module: tool-todo
-    source: git+https://github.com/microsoft/amplifier-module-tool-todo@main
-  - module: tool-filesystem
-    source: git+https://github.com/microsoft/amplifier-module-tool-filesystem@main
+    source: ./amplifier-module-tool-todo
   - module: tool-bash
-    source: git+https://github.com/microsoft/amplifier-module-tool-bash@main
+    source: ./amplifier-module-tool-bash
 
 hooks:
   - module: hooks-status-context

@@ -14,6 +14,8 @@ MODULES=(
     "amplifier-app-benchmarks"
     "amplifier-module-context-simple"
     "amplifier-module-loop-streaming"
+    "amplifier-module-tool-bash"
+    "amplifier-module-tool-todo"
 )
 
 echo "Pulling latest changes for all submodules..."

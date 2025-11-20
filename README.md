@@ -80,6 +80,8 @@ They are included here as submodules for easier debugging or making temporary lo
 - [amplifier-module-loop-streaming](https://github.com/microsoft/amplifier-module-loop-streaming/)
 - [amplifier-config](https://github.com/microsoft/amplifier-config/tree/)
 - [amplifier-profiles](https://github.com/microsoft/amplifier-profiles/tree/)
+- [amplifier-module-tool-bash](https://github.com/microsoft/amplifier-module-tool-bash/)
+- [amplifier-module-tool-todo](https://github.com/microsoft/amplifier-module-tool-todo/)
 
 
 ## Modules Used
@@ -91,11 +93,9 @@ They are not linked as submodules because there is a minimal chance we will need
 - [amplifier-module-hooks-streaming-ui](https://github.com/microsoft/amplifier-module-hooks-streaming-ui/)
 - [amplifier-module-provider-anthropic](https://github.com/microsoft/amplifier-module-provider-anthropic/)
 - [amplifier-module-provider-azure-openai](https://github.com/microsoft/amplifier-module-provider-azure-openai/)
-- [amplifier-module-tool-bash](https://github.com/microsoft/amplifier-module-tool-bash/)
 - [amplifier-module-tool-filesystem](https://github.com/microsoft/amplifier-module-tool-filesystem/)
 - [amplifier-module-tool-search](https://github.com/microsoft/amplifier-module-tool-search/)
 - [amplifier-module-tool-task](https://github.com/microsoft/amplifier-module-tool-task/)
-- [amplifier-module-tool-todo](https://github.com/microsoft/amplifier-module-tool-todo/)
 - [amplifier-module-tool-web](https://github.com/microsoft/amplifier-module-tool-web/)
 - [amplifier-module-resolution](https://github.com/microsoft/amplifier-module-resolution/tree/)
 

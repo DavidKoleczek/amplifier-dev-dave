@@ -18,6 +18,8 @@ MODULES=(
     "amplifier-profiles"
     "amplifier-module-context-simple"
     "amplifier-module-provider-openai"
+    "amplifier-module-tool-bash"
+    "amplifier-module-tool-todo"
 )
 
 # Local modules (not submodules)
