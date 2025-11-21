@@ -1,0 +1,10 @@
+1. Go to https://en.wikipedia.org/wiki/2024_NFL_season and extract the regular season standings into a csv file.
+2. Save that csv file in a directory named `nfl_standings_2024.csv`
+3. Create a Markdown report that has an appendix with the standings in a markdown table. Put the report in a file named `nfl_report.md`
+4. For the Patriots, Seahawks, and Eagles
+  - Find the the results of each game they played
+  - Look at their season and find two news articles about turning points in their season
+  - Write a section about each team in the report with their season results and write about the inflection points in their season grounded in the articles you found.
+5. Finally, add an introduction to the article
+
+Please make a todo list needed to accomplish this and let me know when its done including the directory you placed the final report in.

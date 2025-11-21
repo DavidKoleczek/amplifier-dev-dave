@@ -112,6 +112,17 @@ uv run run_benchmarks \
     --mode sanity_check
 ```
 
+Run custom tasks from `.amplifier/eval-tasks/`:
+
+```bash
+uv run run_benchmarks \
+    --local_source_path . \
+    --override_agent_path .amplifier/eval-agent-definitions/dev-local \
+    --mode .amplifier/eval-tasks \
+    --runs-dir ".benchmark_results/" \
+    --num_trials 1
+```
+
 **Prerequisites:**
 - `OPENAI_API_KEY` environment variable must be set (required by dev-local profile)
 - `ANTHROPIC_API_KEY` environment variable must be set (required by eval-recipes test harness)
