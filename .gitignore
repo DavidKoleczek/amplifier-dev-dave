@@ -11,6 +11,8 @@
 !.amplifier/settings.yaml
 !.amplifier/eval-agent-definitions/
 !.amplifier/eval-agent-definitions/**
+!.amplifier/eval-tasks/
+!.amplifier/eval-tasks/**
 
 # Amplifier logs
 *.log.jsonl
