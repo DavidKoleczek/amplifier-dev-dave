@@ -60,12 +60,6 @@ A debug configuration is at [.vscode/launch.json](.vscode/launch.json) for runni
 These are modules that are actively being developed.
 Eventually, these may graduate to their own repos.
 
-- **[amplifier-module-provider-openai-v2](./amplifier-module-provider-openai-v2/)** - OpenAI provider using the Responses API with configurable model and reasoning effort.
-
-- **[amplifier-module-context-coding](./amplifier-module-context-coding/)** - Minimal context manager for coding workflows.
-
-- **[amplifier-module-orchestrator-coding](./amplifier-module-orchestrator-coding/)** - Minimal orchestrator implementing the core orchestration loop: calls provider, executes tools in parallel, adds results to context, and loops until completion.
-
 
 ## Modules as Submodules
 
@@ -82,6 +76,15 @@ They are included here as submodules for easier debugging or making temporary lo
 - [amplifier-profiles](https://github.com/microsoft/amplifier-profiles/tree/)
 - [amplifier-module-tool-bash](https://github.com/microsoft/amplifier-module-tool-bash/)
 - [amplifier-module-tool-todo](https://github.com/microsoft/amplifier-module-tool-todo/)
+- [amplifier-collection-recipes](https://github.com/microsoft/amplifier-collection-recipes/)
+
+### Adding a new submodule
+
+```bash
+git submodule add -b main https://github.com/microsoft/<module-name> <module-name>
+```
+
+Then add the module name to the `MODULES` array in `scripts/init.sh` and run `./scripts/init.sh` to install it.
 
 
 ## Modules Used

@@ -37,3 +37,7 @@
 	path = amplifier-module-tool-todo
 	url = https://github.com/microsoft/amplifier-module-tool-todo
 	branch = main
+[submodule "amplifier-collection-recipes"]
+	path = amplifier-collection-recipes
+	url = https://github.com/microsoft/amplifier-collection-recipes
+	branch = main

@@ -23,11 +23,7 @@ MODULES=(
 )
 
 # Local modules (not submodules)
-LOCAL_MODULES=(
-    "amplifier-module-orchestrator-coding"
-    "amplifier-module-provider-openai-v2"
-    "amplifier-module-context-coding"
-)
+LOCAL_MODULES=()
 
 for module in "${MODULES[@]}"; do
     if git config --file .gitmodules --get "submodule.$module.path" > /dev/null 2>&1; then
