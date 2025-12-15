@@ -84,8 +84,10 @@ They are included here as submodules for easier debugging or making temporary lo
 git submodule add -b main https://github.com/microsoft/<module-name> <module-name>
 ```
 
-Then add the module name to the `MODULES` array in `scripts/init.sh` and run `./scripts/init.sh` to install it.
-
+Then add the module name to the `MODULES` array in `scripts/init.sh` and `scripts/update-submodules.sh` and run `./scripts/init.sh` to install it.
+For the module to be correctly used, you may have to add it to *both*:
+- [.amplifier/profiles/dev-local.md](.amplifier/profiles/dev-local.md)
+- [.amplifier/settings.yaml](.amplifier/settings.yaml)
 
 ## Modules Used
 

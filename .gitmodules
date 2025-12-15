@@ -41,3 +41,7 @@
 	path = amplifier-collection-recipes
 	url = https://github.com/microsoft/amplifier-collection-recipes
 	branch = main
+[submodule "amplifier-module-provider-anthropic"]
+	path = amplifier-module-provider-anthropic
+	url = https://github.com/microsoft/amplifier-module-provider-anthropic
+	branch = main

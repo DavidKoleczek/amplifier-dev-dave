@@ -17,6 +17,7 @@ MODULES=(
     "amplifier-config"
     "amplifier-profiles"
     "amplifier-module-context-simple"
+    "amplifier-module-provider-anthropic"
     "amplifier-module-provider-openai"
     "amplifier-module-tool-bash"
     "amplifier-module-tool-todo"
@@ -38,18 +39,27 @@ done
 # Skips those with local changes
 for module in "${MODULES[@]}"; do
     if [ -d "$module" ]; then
-        cd "$module"
-        if git diff-index --quiet HEAD -- 2>/dev/null; then
-            cd ..
-            # Update submodule (init if needed)
+        # Check if submodule is initialized (has .git file/directory)
+        if [ ! -e "$module/.git" ]; then
+            # Submodule not initialized, initialize it
+            echo "  [INIT] $module"
             git submodule update --init "$module" 2>/dev/null || true
             cd "$module"
-            # Ensure on main branch (not detached HEAD)
             git checkout "$DEFAULT_BRANCH" 2>/dev/null || echo "  [INFO] $module already on $DEFAULT_BRANCH"
             cd ..
         else
-            echo "  [SKIP] $module (has local changes)"
-            cd ..
+            # Submodule is initialized, check for local changes
+            cd "$module"
+            if git diff-index --quiet HEAD -- 2>/dev/null; then
+                cd ..
+                git submodule update --init "$module" 2>/dev/null || true
+                cd "$module"
+                git checkout "$DEFAULT_BRANCH" 2>/dev/null || echo "  [INFO] $module already on $DEFAULT_BRANCH"
+                cd ..
+            else
+                echo "  [SKIP] $module (has local changes)"
+                cd ..
+            fi
         fi
     fi
 done

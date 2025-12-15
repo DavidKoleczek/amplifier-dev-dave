@@ -7,13 +7,14 @@ set -e
 
 # Modules in dependency order
 MODULES=(
+    "amplifier-app-cli"
+    "amplifier-app-benchmarks"
     "amplifier-core"
     "amplifier-config"
     "amplifier-profiles"
-    "amplifier-app-cli"
-    "amplifier-app-benchmarks"
     "amplifier-module-context-simple"
-    "amplifier-module-loop-streaming"
+    "amplifier-module-provider-anthropic"
+    "amplifier-module-provider-openai"
     "amplifier-module-tool-bash"
     "amplifier-module-tool-todo"
 )

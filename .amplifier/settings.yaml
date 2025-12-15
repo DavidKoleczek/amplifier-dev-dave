@@ -1,0 +1,5 @@
+sources:
+  provider-anthropic: ./amplifier-module-provider-anthropic
+  provider-openai: ./amplifier-module-provider-openai
+  tool-bash: ./amplifier-module-tool-bash
+  tool-todo: ./amplifier-module-tool-todo
