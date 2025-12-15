@@ -21,10 +21,17 @@ MODULES=(
     "amplifier-module-provider-openai"
     "amplifier-module-tool-bash"
     "amplifier-module-tool-todo"
+    "amplifier-collection-recipes"
 )
 
 # Local modules (not submodules)
-LOCAL_MODULES=()
+# Modules that have their own pyproject.toml and need installation,
+# but aren't standalone git repositories. This includes:
+# - Nested modules within submodules (e.g., amplifier-collection-recipes/modules/*)
+# - Local modules in this repo that haven't been extracted to their own repo yet
+LOCAL_MODULES=(
+    "amplifier-collection-recipes/modules/tool-recipes"
+)
 
 for module in "${MODULES[@]}"; do
     if git config --file .gitmodules --get "submodule.$module.path" > /dev/null 2>&1; then

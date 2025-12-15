@@ -17,6 +17,7 @@ MODULES=(
     "amplifier-module-provider-openai"
     "amplifier-module-tool-bash"
     "amplifier-module-tool-todo"
+    "amplifier-collection-recipes"
 )
 
 echo "Pulling latest changes for all submodules..."

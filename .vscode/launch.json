@@ -23,6 +23,20 @@
       "args": ["run", "--profile", "dev-local", "--mode", "chat"],
       "console": "integratedTerminal",
       "justMyCode": false
+    },
+    {
+      "name": "Debug Recipes",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "amplifier_app_cli.main",
+      "args": [
+        "run",
+        "--profile",
+        "dev-local-recipes",
+        "validate the recipe at amplifier-collection-recipes/examples/simple-analysis-recipe.yaml"
+      ],
+      "console": "integratedTerminal",
+      "justMyCode": false
     }
   ]
 }
